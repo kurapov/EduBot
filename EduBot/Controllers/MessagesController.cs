@@ -8,6 +8,7 @@ using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Connector.Utilities;
 using Newtonsoft.Json;
+using EduBot.Core;
 
 namespace EduBot
 {
@@ -18,8 +19,17 @@ namespace EduBot
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
         /// </summary>
+        /// 
+        EduBotDbContext db;
+        public MessagesController()
+        {
+            db = new EduBotDbContext();
+        }
+
         public async Task<Message> Post([FromBody]Message message)
         {
+            var a = db.Questions.ToList();
+
             if (message.Type == "Message")
             {
                 // calculate something for us to return
