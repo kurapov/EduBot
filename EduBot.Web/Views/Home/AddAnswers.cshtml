@@ -1,0 +1,33 @@
+﻿@model EduBot.Web.Models.AnswerEditModel
+@using EduBot.Core.Model
+
+@using (@Html.BeginForm("AddAnswers"))
+{
+    <div class="clearfix">
+        <div style="float: left;">
+            <h4> Select Intents:</h4>
+            <select name="Intent" class="form-control">
+                @foreach (Intent intent in (IEnumerable<Intent>) ViewBag.Intents)
+                {
+                    <option value="@intent.Id">@intent.Value</option>
+                }
+            </select>
+        </div>
+
+        <div style="float: left;">
+            <h4> Select Entities:</h4>
+            <select name="Entities" multiple class="form-control" style="height: 200px;">
+                @foreach (Entity entity in (IEnumerable<Entity>) ViewBag.Entities)
+                {
+                    <option value="@entity.Id">(@entity.Key) @entity.Value </option>
+                }
+            </select>
+        </div>
+
+        <div style="float: left;">
+            <h4> Enter Answer:</h4>
+            <textarea name="Answer" class="form-control" rows="3"></textarea>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-success" value="Create" />
+}
